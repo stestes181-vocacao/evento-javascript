@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Eventos - Loja</title>
+<style>
+  body { font-family: sans-serif; max-width: 420px; margin: 40px auto; }
+  .produto { border: 1px solid #c612ea; padding: 16px; border-radius: 8px; }
+  .produto:hover { background: #7d061e; }
+  button { padding: 8px 14px; cursor: pointer; }
+  #msg { color: rgb(233, 20, 230); min-height: 24px; }
+</style>
+</head>
+<body>
+  <h2>Eventos em JavaScript</h2>
+
+  <div class="produto" id="produto">
+    <h3>Pizza Margherita - R$ 40,00</h3>
+    <label>Quantidade: <input type="number" id="qtd" value="1" min="1"></label>
+    <p>Total: <strong id="total">R$ 40,00</strong></p>
+    <button id="btnComprar">Adicionar ao carrinho</button>
+    <p id="msg"></p>
+  </div>
+
+<script>
+  const preco = 40;
+  const qtd = document.getElementById('qtd');
+  const total = document.getElementById('total');
+  const msg = document.getElementById('msg');
+
+  // 1) Evento de clique
+  document.getElementById('btnComprar').addEventListener('click', (evento) => {
+    msg.textContent = `Adicionado: ${qtd.value}x pizza!`;
+    console.log('Tipo do evento:', evento.type, '| Elemento:', evento.target);
+  });
+
+  // 2) Evento de digitação/alteração no input
+  qtd.addEventListener('input', () => {
+    total.textContent = 'R$ ' + (preco * qtd.value).toFixed(2).replace('.', ',');
+  });
+
+  // 3) Eventos de mouse
+  const produto = document.getElementById('produto');
+  produto.addEventListener('mouseenter', () => msg.textContent = 'Promoção hoje!');
+  produto.addEventListener('mouseleave', () => msg.textContent = '');
+</script>
+</body>
+</html>
